@@ -11727,7 +11727,8 @@ static void command_event_set_volume(
       struct rarch_state *p_rarch, float gain)
 {
    char msg[128];
-   float new_volume            = settings->floats.audio_volume + gain;
+   float volumes                = pow(10, settings->floats.audio_volume/20)+gain;
+   float new_volume            = 20*log10(volumes);
 
    new_volume                  = MAX(new_volume, -80.0f);
    new_volume                  = MIN(new_volume, 12.0f);
@@ -14531,10 +14532,10 @@ bool command_event(enum event_command cmd, void *data)
          }
          break;
       case CMD_EVENT_VOLUME_UP:
-         command_event_set_volume(settings, p_rarch, 0.5f);
+         command_event_set_volume(settings, p_rarch, 0.1f);
          break;
       case CMD_EVENT_VOLUME_DOWN:
-         command_event_set_volume(settings, p_rarch, -0.5f);
+         command_event_set_volume(settings, p_rarch, -0.1f);
          break;
       case CMD_EVENT_MIXER_VOLUME_UP:
          command_event_set_mixer_volume(settings, p_rarch, 0.5f);
@@ -37128,10 +37129,15 @@ static enum runloop_state runloop_check_state(
    /* Check if we have pressed the AI Service toggle button */
    HOTKEY_CHECK(RARCH_AI_SERVICE, CMD_EVENT_AI_SERVICE_TOGGLE, true, NULL);
 
-   if (BIT256_GET(current_bits, RARCH_VOLUME_UP))
-      command_event(CMD_EVENT_VOLUME_UP, NULL);
-   else if (BIT256_GET(current_bits, RARCH_VOLUME_DOWN))
-      command_event(CMD_EVENT_VOLUME_DOWN, NULL);
+   /* Check if we have pressed the audio mute toggle button */
+   HOTKEY_CHECK(RARCH_MUTE, CMD_EVENT_AUDIO_MUTE_TOGGLE, true, NULL);
+
+   /* Check if we have pressed the audio mute toggle button */
+   HOTKEY_CHECK(RARCH_VOLUME_UP, CMD_EVENT_VOLUME_UP, true, NULL);
+
+   /* Check if we have pressed the audio mute toggle button */
+   HOTKEY_CHECK(RARCH_VOLUME_DOWN, CMD_EVENT_VOLUME_DOWN, true, NULL);
+   
 
 #ifdef HAVE_NETWORKING
    /* Check Netplay */
