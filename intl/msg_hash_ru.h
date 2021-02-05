@@ -6002,7 +6002,7 @@ MSG_HASH(
    )
 MSG_HASH(
    MENU_ENUM_LABEL_VALUE_STATE_SLOT,
-   "Слот состояния"
+   "Слот сохранения"
    )
 MSG_HASH(
    MENU_ENUM_SUBLABEL_STATE_SLOT,
@@ -6010,7 +6010,7 @@ MSG_HASH(
    )
 MSG_HASH(
    MENU_ENUM_LABEL_VALUE_SAVE_STATE,
-   "Сохранить состояние"
+   "Сохранить"
    )
 MSG_HASH(
    MENU_ENUM_SUBLABEL_SAVE_STATE,
@@ -6018,7 +6018,7 @@ MSG_HASH(
    )
 MSG_HASH(
    MENU_ENUM_LABEL_VALUE_LOAD_STATE,
-   "Загрузить состояние"
+   "Загрузить"
    )
 MSG_HASH(
    MENU_ENUM_SUBLABEL_LOAD_STATE,
@@ -6082,7 +6082,7 @@ MSG_HASH(
    )
 MSG_HASH(
    MENU_ENUM_LABEL_VALUE_CORE_OPTIONS,
-   "Опции"
+   "Настройка ядра"
    )
 MSG_HASH(
    MENU_ENUM_SUBLABEL_CORE_OPTIONS,
@@ -6896,6 +6896,14 @@ MSG_HASH(
 MSG_HASH(
    MENU_ENUM_LABEL_VALUE_NO_CORE,
    "Ядро не загружено"
+   )
+MSG_HASH(
+   MENU_ENUM_LABEL_VALUE_INFO,
+   "Инфа"
+   )
+MSG_HASH(
+   MENU_ENUM_LABEL_VALUE_RESET,
+   "Сброс"
    )
 MSG_HASH(
    MENU_ENUM_LABEL_VALUE_SEARCH,
