@@ -94,9 +94,9 @@
 enum
 {
    XMB_TEXTURE_MAIN_MENU = 0,
-   XMB_TEXTURE_SETTINGS,
    XMB_TEXTURE_HISTORY,
    XMB_TEXTURE_FAVORITES,
+   XMB_TEXTURE_SETTINGS,
    XMB_TEXTURE_MUSICS,
 #if defined(HAVE_FFMPEG) || defined(HAVE_MPV)
    XMB_TEXTURE_MOVIES,
@@ -224,9 +224,9 @@ enum
 enum
 {
    XMB_SYSTEM_TAB_MAIN = 0,
-   XMB_SYSTEM_TAB_SETTINGS,
    XMB_SYSTEM_TAB_HISTORY,
    XMB_SYSTEM_TAB_FAVORITES,
+   XMB_SYSTEM_TAB_SETTINGS,
    XMB_SYSTEM_TAB_MUSIC,
 #if defined(HAVE_FFMPEG) || defined(HAVE_MPV)
    XMB_SYSTEM_TAB_VIDEO,
@@ -280,9 +280,9 @@ typedef struct xmb_handle
 #if defined(HAVE_FFMPEG) || defined(HAVE_MPV)
    xmb_node_t video_tab_node;
 #endif
-   xmb_node_t settings_tab_node;
    xmb_node_t history_tab_node;
    xmb_node_t favorites_tab_node;
+   xmb_node_t settings_tab_node;
    xmb_node_t add_tab_node;
 #if defined(HAVE_LIBRETRODB)
    xmb_node_t explore_tab_node;
@@ -1901,6 +1901,10 @@ static xmb_node_t* xmb_get_node(xmb_handle_t *xmb, unsigned i)
 {
    switch (xmb_get_system_tab(xmb, i))
    {
+	        case XMB_SYSTEM_TAB_HISTORY:
+      return &xmb->history_tab_node;
+      case XMB_SYSTEM_TAB_FAVORITES:
+         return &xmb->favorites_tab_node;
       case XMB_SYSTEM_TAB_SETTINGS:
          return &xmb->settings_tab_node;
 #ifdef HAVE_IMAGEVIEWER
@@ -1913,10 +1917,6 @@ static xmb_node_t* xmb_get_node(xmb_handle_t *xmb, unsigned i)
       case XMB_SYSTEM_TAB_VIDEO:
          return &xmb->video_tab_node;
 #endif
-      case XMB_SYSTEM_TAB_HISTORY:
-         return &xmb->history_tab_node;
-      case XMB_SYSTEM_TAB_FAVORITES:
-         return &xmb->favorites_tab_node;
 #ifdef HAVE_NETWORKING
       case XMB_SYSTEM_TAB_NETPLAY:
          return &xmb->netplay_tab_node;
@@ -5328,7 +5328,7 @@ static void xmb_layout_ps3(xmb_handle_t *xmb, int width)
    xmb->icon_spacing_horizontal  = 200.0 * scale_factor;
    xmb->icon_spacing_vertical    = 64.0 * scale_factor;
 
-   xmb->margins_screen_top       = (256+32) * scale_factor;
+   xmb->margins_screen_top       = (256) * scale_factor;
    xmb->margins_screen_left      = 336.0 * scale_factor;
 
    xmb->margins_title_left       = 60 * scale_factor;
@@ -5604,13 +5604,13 @@ static void *xmb_init(void **userdata, bool video_is_threaded)
 
    xmb->system_tab_end                = 0;
    xmb->tabs[xmb->system_tab_end]     = XMB_SYSTEM_TAB_MAIN;
-
+   if (settings->bools.menu_content_show_history)
+      xmb->tabs[++xmb->system_tab_end] = XMB_SYSTEM_TAB_HISTORY;
    if (settings->bools.menu_content_show_settings && !settings->bools.kiosk_mode_enable)
       xmb->tabs[++xmb->system_tab_end] = XMB_SYSTEM_TAB_SETTINGS;
    if (settings->bools.menu_content_show_favorites)
       xmb->tabs[++xmb->system_tab_end] = XMB_SYSTEM_TAB_FAVORITES;
-   if (settings->bools.menu_content_show_history)
-      xmb->tabs[++xmb->system_tab_end] = XMB_SYSTEM_TAB_HISTORY;
+
 #ifdef HAVE_IMAGEVIEWER
    if (settings->bools.menu_content_show_images)
       xmb->tabs[++xmb->system_tab_end] = XMB_SYSTEM_TAB_IMAGES;
@@ -6072,10 +6072,6 @@ static void xmb_context_reset_textures(
    xmb->main_menu_node.alpha    = xmb->categories_active_alpha;
    xmb->main_menu_node.zoom     = xmb->categories_active_zoom;
 
-   xmb->settings_tab_node.icon  = xmb->textures.list[XMB_TEXTURE_SETTINGS];
-   xmb->settings_tab_node.alpha = xmb->categories_active_alpha;
-   xmb->settings_tab_node.zoom  = xmb->categories_active_zoom;
-
    xmb->history_tab_node.icon   = xmb->textures.list[XMB_TEXTURE_HISTORY];
    xmb->history_tab_node.alpha  = xmb->categories_active_alpha;
    xmb->history_tab_node.zoom   = xmb->categories_active_zoom;
@@ -6083,6 +6079,10 @@ static void xmb_context_reset_textures(
    xmb->favorites_tab_node.icon   = xmb->textures.list[XMB_TEXTURE_FAVORITES];
    xmb->favorites_tab_node.alpha  = xmb->categories_active_alpha;
    xmb->favorites_tab_node.zoom   = xmb->categories_active_zoom;
+
+   xmb->settings_tab_node.icon  = xmb->textures.list[XMB_TEXTURE_SETTINGS];
+   xmb->settings_tab_node.alpha = xmb->categories_active_alpha;
+   xmb->settings_tab_node.zoom  = xmb->categories_active_zoom;
 
    xmb->music_tab_node.icon     = xmb->textures.list[XMB_TEXTURE_MUSICS];
    xmb->music_tab_node.alpha    = xmb->categories_active_alpha;

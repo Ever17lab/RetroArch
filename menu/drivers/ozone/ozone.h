@@ -32,11 +32,11 @@ typedef struct ozone_handle ozone_handle_t;
 #define ANIMATION_CURSOR_DURATION      133
 #define ANIMATION_CURSOR_PULSE         500
 
-#define FONT_SIZE_FOOTER            18
+#define FONT_SIZE_FOOTER            20
 #define FONT_SIZE_TITLE             36
 #define FONT_SIZE_TIME              22
 #define FONT_SIZE_ENTRIES_LABEL     24
-#define FONT_SIZE_ENTRIES_SUBLABEL  18
+#define FONT_SIZE_ENTRIES_SUBLABEL  20
 #define FONT_SIZE_SIDEBAR           24
 
 #define HEADER_HEIGHT 87
