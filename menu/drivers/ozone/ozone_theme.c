@@ -340,9 +340,9 @@ ozone_theme_t ozone_theme_gruvbox_dark = {
    /* Float colors for quads and icons */
    COLOR_HEX_TO_FLOAT(0xD5C4A1, 1.0f),             /* header_footer_separator */
    COLOR_HEX_TO_FLOAT(0xEBDBB2, 1.0f),             /* text */
-   COLOR_HEX_TO_FLOAT(0x1D2021, 1.0f),             /* selection */
+   COLOR_HEX_TO_FLOAT(0xD75D0E, 1.0f),             /* selection */
    COLOR_HEX_TO_FLOAT(0xD75D0E, 1.0f),             /* selection_border */
-   COLOR_HEX_TO_FLOAT(0x665C54, 1.0f),             /* entries_border */
+   COLOR_HEX_TO_FLOAT(0x282828, 1.0f),             /* entries_border */
    COLOR_HEX_TO_FLOAT(0xEBDBB2, 1.0f),             /* entries_icon */
    COLOR_HEX_TO_FLOAT(0x8EC07C, 1.0f),             /* text_selected */
    COLOR_HEX_TO_FLOAT(0x32302F, 1.0f),             /* message_background */
@@ -350,7 +350,7 @@ ozone_theme_t ozone_theme_gruvbox_dark = {
    /* RGBA colors for text */
    0xEBDBB2FF,                                     /* text_rgba */
    0x8EC07CFF,                                     /* text_selected_rgba */
-   0xD79921FF,                                     /* text_sublabel_rgba */
+   0xEBDBB2FF,                                     /* text_sublabel_rgba */
 
    /* Sidebar color */
    ozone_sidebar_background_gruvbox_dark,          /* sidebar_background */

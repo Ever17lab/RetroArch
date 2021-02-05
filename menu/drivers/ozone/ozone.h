@@ -131,6 +131,8 @@ struct ozone_handle
       ozone_footer_label_t ok;
       ozone_footer_label_t back;
       ozone_footer_label_t search;
+      ozone_footer_label_t reset;
+      ozone_footer_label_t info;
       ozone_footer_label_t fullscreen_thumbs;
       ozone_footer_label_t metadata_toggle;
    } footer_labels;
